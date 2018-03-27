@@ -1,5 +1,8 @@
 # WorkTimeMVC
 
-This is a basic ASP.NET MVC application that allows user to track their work time by clocking in/out. 
+This is a basic ASP.NET MVC application that allows user to track their work time by clocking in/out. Register as a user in top right. All users can clock in / out. Managers can modify work times and add / delete employees.
 
-TODO: Add authentication for more than one user and possibly permissioning
+TODO: 
+Fix dropdownlist for user in create / edit worktime
+Encrypt passwords in database
+
