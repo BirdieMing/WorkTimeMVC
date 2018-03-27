@@ -8,17 +8,26 @@ using System.Web;
 using System.Web.Mvc;
 using EmployeeWorkTime.DAL;
 using EmployeeWorkTime.Models;
+using EmployeeWorkTime.Util;
 
 namespace EmployeeWorkTime.Controllers
 {
     public class WorkTimesController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
+        private SessionContext s = new SessionContext();
+
+        [ChildActionOnly]
+        public ActionResult WorkTimesNavbar()
+        {
+            Employee user = s.GetUserData();
+            return PartialView("_NavbarPartial", user);
+        }
 
         // GET: WorkTimes
         public ActionResult Index()
         {
-            return View(db.WorkTimes.ToList());
+            return View(db.WorkTimes.Include(time => time.Employee).ToList());
         }
 
         // GET: WorkTimes/Details/5
@@ -39,6 +48,8 @@ namespace EmployeeWorkTime.Controllers
         // GET: WorkTimes/Create
         public ActionResult Create()
         {
+            List<Employee> employees = db.Users.ToList();
+            ViewData["LoadEmployees"] = DropDownList<Employee>.LoadItems(employees, "Id", "UserName");
             return View();
         }
 
@@ -71,6 +82,10 @@ namespace EmployeeWorkTime.Controllers
             {
                 return HttpNotFound();
             }
+
+            List<Employee> employees = db.Users.ToList();
+            ViewData["LoadEmployees"] = DropDownList<Employee>.LoadItems(employees, "Id", "UserName");
+            ViewBag.Users = new SelectList(db.Users.ToList(), "Id", "UserName");
             return View(workTime);
         }
 
@@ -127,6 +142,11 @@ namespace EmployeeWorkTime.Controllers
 
         public ActionResult Clock()
         {
+            Employee e = s.GetUserData();
+
+            if (e == null)
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+
             WorkTime today = GetTodayWorkTime();
             return View(today);
         }
@@ -185,14 +205,17 @@ namespace EmployeeWorkTime.Controllers
 
         private WorkTime GetTodayWorkTime()
         {
+            SessionContext c = new SessionContext();
+            Employee employee = c.GetUserData(); 
             WorkTime today;
 
             if (db.WorkTimes.Any(e => e.WorkDate == DateTime.Today))
-                today = db.WorkTimes.First(e => e.WorkDate == DateTime.Today);
+                today = db.WorkTimes.Include(t => t.Employee).First(e => e.WorkDate == DateTime.Today);
             else
             {
                 today = new WorkTime();
                 today.WorkDate = DateTime.Today;
+                today.Employee = db.Users.First(u => u.Id == employee.Id); ;
                 db.WorkTimes.Add(today);
                 db.SaveChanges();
             }

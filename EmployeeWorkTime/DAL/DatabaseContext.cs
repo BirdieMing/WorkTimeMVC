@@ -16,6 +16,8 @@ namespace EmployeeWorkTime.DAL
 
         public DbSet<WorkTime> WorkTimes { get; set; }
 
+        public DbSet<Employee> Users { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

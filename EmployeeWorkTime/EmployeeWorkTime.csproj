@@ -128,14 +128,20 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WorkTimesController.cs" />
     <Compile Include="DAL\DatabaseContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Util\DropDownList.cs" />
+    <Compile Include="Util\EmployeeApplication.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\WorkTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\SessionContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -180,6 +186,13 @@
     <Content Include="Views\WorkTimes\Edit.cshtml" />
     <Content Include="Views\WorkTimes\Index.cshtml" />
     <Content Include="Views\WorkTimes\Clock.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
+    <Content Include="Views\Employees\Details.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Employees\Login.cshtml" />
+    <Content Include="Views\Shared\_NavbarPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

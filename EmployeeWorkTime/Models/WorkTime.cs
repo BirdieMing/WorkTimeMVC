@@ -10,14 +10,20 @@ namespace EmployeeWorkTime.Models
     {
         public int Id { get; set; }
 
-        //public int EmployeeId { get; set; }
-
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:H:mm}")]
         public DateTime? ClockIn { get; set; }
 
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:H:mm}")]
         public DateTime? ClockOut { get; set; }
 
         [Required]
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         public DateTime WorkDate { get; set; }
+
+        [Required]
+        public Employee Employee { get; set; }
     }
 }
