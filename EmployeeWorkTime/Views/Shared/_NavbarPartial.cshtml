@@ -6,8 +6,8 @@
             <li>@Html.ActionLink("Clock In / Out", "Clock", "WorkTimes")</li>
             @if (Model.IsManager)
             { 
-                <li>@Html.ActionLink("Manage WorkTimes", "Index", "WorkTimes")</li>
-                <li>@Html.ActionLink("Manage Employees", "Index", "Employees")</li>
+                <li>@Html.ActionLink("WorkTimes", "Index", "WorkTimes")</li>
+                <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
             }
         </ul>
 }

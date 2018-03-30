@@ -42,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Employee.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Employee, (IEnumerable<SelectListItem>)ViewData["LoadEmployees"], "--Select--", new { @class = "select" })
+                @Html.DropDownListFor(model => model.EmployeeID, (SelectList)ViewBag.Users)
             </div>
         </div>
 

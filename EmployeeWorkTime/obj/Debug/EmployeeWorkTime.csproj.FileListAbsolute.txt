@@ -41,3 +41,4 @@ D:\Dev\EmployeeWorkTime\EmployeeWorkTime\bin\Antlr3.Runtime.pdb
 D:\Dev\EmployeeWorkTime\EmployeeWorkTime\bin\Newtonsoft.Json.xml
 D:\Dev\EmployeeWorkTime\EmployeeWorkTime\obj\Debug\EmployeeWorkTime.dll
 D:\Dev\EmployeeWorkTime\EmployeeWorkTime\obj\Debug\EmployeeWorkTime.pdb
+D:\Dev\EmployeeWorkTime\EmployeeWorkTime\obj\Debug\EmployeeWorkTime.csprojResolveAssemblyReference.cache

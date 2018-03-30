@@ -27,7 +27,7 @@ namespace EmployeeWorkTime.Controllers
         // GET: WorkTimes
         public ActionResult Index()
         {
-            return View(db.WorkTimes.Include(time => time.Employee).ToList());
+            return View(db.WorkTimes.ToList());
         }
 
         // GET: WorkTimes/Details/5
@@ -48,8 +48,7 @@ namespace EmployeeWorkTime.Controllers
         // GET: WorkTimes/Create
         public ActionResult Create()
         {
-            List<Employee> employees = db.Users.ToList();
-            ViewData["LoadEmployees"] = DropDownList<Employee>.LoadItems(employees, "Id", "UserName");
+            ViewBag.Users = new SelectList(db.Users.ToList(), "Id", "UserName");
             return View();
         }
 
@@ -58,10 +57,11 @@ namespace EmployeeWorkTime.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,ClockIn,ClockOut,WorkDate")] WorkTime workTime)
+        public ActionResult Create([Bind(Include = "Id,ClockIn,ClockOut,WorkDate,EmployeeID")] WorkTime workTime)
         {
             if (ModelState.IsValid)
             {
+                ValidateModel(workTime);
                 db.WorkTimes.Add(workTime);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,8 +83,6 @@ namespace EmployeeWorkTime.Controllers
                 return HttpNotFound();
             }
 
-            List<Employee> employees = db.Users.ToList();
-            ViewData["LoadEmployees"] = DropDownList<Employee>.LoadItems(employees, "Id", "UserName");
             ViewBag.Users = new SelectList(db.Users.ToList(), "Id", "UserName");
             return View(workTime);
         }
@@ -94,15 +92,31 @@ namespace EmployeeWorkTime.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,ClockIn,ClockOut,WorkDate")] WorkTime workTime)
+        public ActionResult Edit([Bind(Include = "Id,ClockIn,ClockOut,WorkDate,EmployeeID")] WorkTime workTime)
         {
             if (ModelState.IsValid)
             {
+                ValidateModel(workTime);
                 db.Entry(workTime).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.Users = new SelectList(db.Users.ToList(), "Id", "UserName");
             return View(workTime);
+        }
+
+        private void ValidateModel(WorkTime workTime)
+        {
+            if (workTime.ClockIn.HasValue)
+            {
+                workTime.ClockIn = new DateTime(workTime.WorkDate.Year, workTime.WorkDate.Month, workTime.WorkDate.Day, workTime.ClockIn.Value.Hour, workTime.ClockIn.Value.Second, 0);
+            }
+
+            if (workTime.ClockOut.HasValue)
+            {
+                workTime.ClockOut = new DateTime(workTime.WorkDate.Year, workTime.WorkDate.Month, workTime.WorkDate.Day, workTime.ClockOut.Value.Hour, workTime.ClockOut.Value.Second, 0);
+            }
         }
 
         // GET: WorkTimes/Delete/5
@@ -210,12 +224,12 @@ namespace EmployeeWorkTime.Controllers
             WorkTime today;
 
             if (db.WorkTimes.Any(e => e.WorkDate == DateTime.Today))
-                today = db.WorkTimes.Include(t => t.Employee).First(e => e.WorkDate == DateTime.Today);
+                today = db.WorkTimes.First(e => e.WorkDate == DateTime.Today);
             else
             {
                 today = new WorkTime();
                 today.WorkDate = DateTime.Today;
-                today.Employee = db.Users.First(u => u.Id == employee.Id); ;
+                today.EmployeeID = employee.Id;
                 db.WorkTimes.Add(today);
                 db.SaveChanges();
             }

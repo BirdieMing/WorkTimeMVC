@@ -22,5 +22,7 @@ namespace EmployeeWorkTime.Models
 
         [Required]
         public bool IsManager { get; set; }
+
+        public virtual ICollection<WorkTime> WorkTimes { get; set; }
     }
 }

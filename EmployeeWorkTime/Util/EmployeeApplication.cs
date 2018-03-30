@@ -13,7 +13,12 @@ namespace EmployeeWorkTime.Util
 
         public Employee GetByUsernameAndPassword(Employee user)
         {
-            return db.Users.Where(u => u.UserName == user.UserName & u.Password == user.Password).FirstOrDefault();
+            if (db.Users.Any((u => u.UserName == user.UserName & u.Password == user.Password)))
+            {
+                return db.Users.Where(u => u.UserName == user.UserName & u.Password == user.Password).FirstOrDefault();
+            }
+            else
+                return null;
         }
     }
 }
