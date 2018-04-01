@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="EmployeeWorkTime-Web.config Connection String" description="EmployeeWorkTime Connection String used in web.config by the application to access the database." defaultValue="Server=tcp:myinstance.cbgnzdlrxmev.us-west-2.rds.amazonaws.com,1433;Database=EmployeeWorkTime;User ID=PandaMing;Password=Ming1234;Trusted_Connection=False;Encrypt=True;MultipleActiveResultSets=True;Max Pool Size=100;TrustServerCertificate=True;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Dev\\EmployeeWorkTime\\EmployeeWorkTime\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='EmployeeWorkTime']/@connectionString" />
+  </parameter>
+</parameters>

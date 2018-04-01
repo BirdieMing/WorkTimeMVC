@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="Default Web Site/" />
+  <setParameter name="EmployeeWorkTime-Web.config Connection String" value="Server=tcp:panda.c8ob3lwmbxoh.us-east-1.rds.amazonaws.com,1433;Database=EmployeeWorkTime;User ID=PandaMing;Password=Ming1234;Trusted_Connection=False;Encrypt=True;MultipleActiveResultSets=True;Max Pool Size=100;TrustServerCertificate=True;" />
+</parameters>

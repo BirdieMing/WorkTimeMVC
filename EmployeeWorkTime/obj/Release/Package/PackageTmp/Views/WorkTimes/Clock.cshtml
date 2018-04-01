@@ -1,0 +1,39 @@
+﻿@model EmployeeWorkTime.Models.WorkTime
+
+@{
+    ViewBag.Title = "Clock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin:20px">
+    @Html.ValidationMessageFor(m => m.ClockIn, "", new { @style = "color:red" })
+
+    @Html.ValidationMessageFor(m => m.ClockOut, "", new { @style = "color:red" })
+</div>
+
+<div style="margin:20px">
+
+    <p>Today's Date : @(Model.WorkDate.ToString("MMMM dd yyyy"))</p>
+
+</div>
+
+@using (Html.BeginForm("Clock", "WorkTimes", FormMethod.Post))
+{
+    <div style="width:200px;margin:20px">
+        <input name="submit" type="submit" value="Clock In" />
+        <input name="submit" type="submit" value="Clock Out" />
+    </div>
+}
+
+<div style="margin:20px">
+
+    @if (Model.ClockIn.HasValue)
+    {
+        <p>Clock In Time : @(Model.ClockIn.Value.ToString("h:mm tt"))</p>
+    }
+
+    @if (Model.ClockOut.HasValue)
+    {
+        <p>Clock Out Time : @(Model.ClockOut.Value.ToString("h:mm tt"))</p>
+    }
+</div>

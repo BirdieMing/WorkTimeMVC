@@ -1,0 +1,35 @@
+﻿@model EmployeeWorkTime.Models.Employee
+
+@if (@Model != null)
+{
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Clock In / Out", "Clock", "WorkTimes")</li>
+            @if (Model.IsManager)
+            { 
+                <li>@Html.ActionLink("WorkTimes", "Index", "WorkTimes")</li>
+                <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
+            }
+        </ul>
+}
+
+@if (@Model != null)
+{
+    using (Html.BeginForm("Logout", "Employees", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a>
+                    @("Welcome, " + Model.UserName)
+                </a>
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Create", "Employees", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Employees", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

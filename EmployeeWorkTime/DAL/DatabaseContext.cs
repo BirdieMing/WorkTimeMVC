@@ -10,8 +10,9 @@ namespace EmployeeWorkTime.DAL
     public class DatabaseContext : DbContext
     {
 
-        public DatabaseContext() : base("DatabaseContext")
+        public DatabaseContext() : base("EmployeeWorkTime")
         {
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<WorkTime> WorkTimes { get; set; }

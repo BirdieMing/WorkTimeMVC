@@ -27,7 +27,7 @@ namespace EmployeeWorkTime.Controllers
         // GET: WorkTimes
         public ActionResult Index()
         {
-            return View(db.WorkTimes.ToList());
+            return View(db.WorkTimes.Include(w => w.Employee).ToList());
         }
 
         // GET: WorkTimes/Details/5
@@ -42,6 +42,7 @@ namespace EmployeeWorkTime.Controllers
             {
                 return HttpNotFound();
             }
+            workTime.Employee = db.Users.Find(workTime.EmployeeID);
             return View(workTime);
         }
 
@@ -82,6 +83,8 @@ namespace EmployeeWorkTime.Controllers
             {
                 return HttpNotFound();
             }
+
+            workTime.Employee = db.Users.Find(workTime.EmployeeID);
 
             ViewBag.Users = new SelectList(db.Users.ToList(), "Id", "UserName");
             return View(workTime);

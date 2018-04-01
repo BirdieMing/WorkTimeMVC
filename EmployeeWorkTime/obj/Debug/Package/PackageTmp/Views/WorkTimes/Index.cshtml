@@ -1,0 +1,50 @@
+﻿@model IEnumerable<EmployeeWorkTime.Models.WorkTime>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClockIn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClockOut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkDate)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClockIn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClockOut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
