@@ -9,6 +9,7 @@ TODO:
 AWS Deployment
 - Create RDS Database in AWS. 
 - Reference the database in connection string file.
+- Update-Database -ConnectionStringName "MyConnectionString"
 - Install plugin for Elastic Beantalk using Nuget. Deploy to environment.
 
 Azure
