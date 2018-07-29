@@ -6,7 +6,14 @@ TODO:
 - Figure out why time is 4 hours ahead when deployed to AWS
 - Encrypt passwords in database
 
-AWS Deployment
+# Deployment
+
+Local
+- Create new SQL database
+- Create connection string in web.config
+- Update-Database -ConnectionStringName "MyConnectionString"
+
+AWS 
 - Create RDS Database in AWS. 
 - Reference the database in connection string file.
 - Update-Database -ConnectionStringName "MyConnectionString"
