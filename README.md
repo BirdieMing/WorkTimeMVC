@@ -9,8 +9,10 @@ TODO:
 # Deployment
 
 Local
-- Create new SQL database
 - Create connection string in web.config
+<add name="Todo"
+    providerName="System.Data.SqlClient"
+    connectionString="Data Source=.\SQLEXPRESS;AttachDbFileName=|DataDirectory|\TodoDatabase.mdf;Integrated Security=True;User Instance=True;MultipleActiveResultSets=True" />
 - Update-Database -ConnectionStringName "MyConnectionString"
 
 AWS 
